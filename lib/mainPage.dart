@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:showcaseview_flutter/categories.dart';
+import 'package:showcaseview_flutter/category_list_item_widget.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -77,6 +79,12 @@ class _MainPageState extends State<MainPage> {
                     key: _four,
                     description: "Aqui haces búsquedas",
                     child: searchBox(),
+                  ),
+                  SizedBox(height: 30,),
+                  Showcase(
+                    key: _five, 
+                    child: categories(), 
+                    description: "Escoge de las categorias"
                   )
                 ],
               ),
@@ -135,4 +143,21 @@ class _MainPageState extends State<MainPage> {
       ],
     );
   }
+
+  Widget categories() {
+  return Container(
+    height: 185,
+    child: ListView(
+      scrollDirection: Axis.horizontal,
+      children: <Widget>[
+        for (var foodItem in fooditemList.foodItems)
+                Builder(
+                  builder: (context) {
+                    return CategoryListItem(category: foodItem);
+                  },
+                ),
+      ],
+    ),
+  );
+}
 }
